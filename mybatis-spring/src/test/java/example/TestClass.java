@@ -14,7 +14,7 @@ public class TestClass {
                 new String[]{"applicationContext.xml"});
         PetDaoImpl petDAOImpl = (PetDaoImpl) appContext.getBean("petDAOImpl");
 
-        List<Pet> pets = petDAOImpl.getAllPetsData();
+        List<Pet> pets = petDAOImpl.getAllPets();
         for (Pet pet : pets) {
             System.out.println(pet);
         }
