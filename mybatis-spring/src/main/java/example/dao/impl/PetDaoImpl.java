@@ -2,8 +2,6 @@ package example.dao.impl;
 
 import example.dao.PetDao;
 import example.pojo.Pet;
-import example.utils.MyBatisUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import java.util.List;

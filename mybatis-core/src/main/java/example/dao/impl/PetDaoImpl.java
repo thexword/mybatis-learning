@@ -4,6 +4,7 @@ package example.dao.impl;
 import example.dao.PetDao;
 import example.pojo.Pet;
 import example.utils.MyBatisUtils;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -11,9 +12,7 @@ import java.util.List;
 public class PetDaoImpl implements PetDao {
     @Override
     public List<Pet> getAllPets() {
-        SqlSession sqlSession;
-
-        sqlSession = MyBatisUtils.getSqlSession();
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
 
         if (sqlSession == null) {
             return null;
