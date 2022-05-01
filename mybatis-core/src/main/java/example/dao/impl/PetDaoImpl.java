@@ -128,4 +128,15 @@ public class PetDaoImpl implements PetDao {
         sqlSession.close();
         return findAllDogs;
     }
+
+    @Override
+    public void updatePetDynamically(Pet pet) {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        if (sqlSession == null) {
+            return;
+        }
+
+        sqlSession.selectList("updatePetDynamically", pet);
+        sqlSession.close();
+    }
 }

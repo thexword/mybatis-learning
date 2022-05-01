@@ -25,4 +25,6 @@ public interface PetDao {
     List<Pet> findDogPets(Pet pet);
 
     List<Pet> selectPetsIn(Map<String, Object> map);
+
+    void updatePetDynamically(Pet pet);
 }

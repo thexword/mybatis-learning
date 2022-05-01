@@ -56,7 +56,7 @@
                 and sex=#{sex}
             </when>
             <when test="owner != null">
-                and owner like #{owner}
+                and owner=#{owner}
             </when>
             <otherwise>
                 and name like 'Ka%'
@@ -76,8 +76,8 @@
     <update id="updatePetDynamically" parameterType="Pet">
         update pet
         <set>
-            <if test="birth!=null">birth=#{birth}</if>
-            <if test="death!=null">death=#{death}</if>
+            <if test="birth!=null">birth=#{birth},</if>
+            <if test="death!=null">death=#{death},</if>
             <if test="sex!=null">sex=#{sex}</if>
         </set>
         where name=#{name}

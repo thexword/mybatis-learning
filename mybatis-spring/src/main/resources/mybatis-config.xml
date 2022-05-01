@@ -20,6 +20,7 @@
     </typeAliases>
 
     <mappers>
-        <mapper resource="PetDao.xml"/>
+        <mapper class="example.dao.PetDao"/>
+<!--        <mapper resource="PetDao.xml"/>-->
     </mappers>
 </configuration>

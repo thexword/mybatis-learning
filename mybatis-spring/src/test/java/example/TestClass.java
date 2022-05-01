@@ -28,10 +28,9 @@ public class TestClass {
         }
     }
 
-
     @Test
     public void testGetPet() {
-        String petName  = "Tony";
+        String petName  = "hkkj";
         Pet pet = petDao.getPet(petName);
         System.out.println(pet);
     }
@@ -46,7 +45,7 @@ public class TestClass {
 
     @Test
     public void testSelectPets() {
-        List<Pet> petList = petDao.selectPets("w");
+        List<Pet> petList = petDao.selectPets("m");
         for (Pet pet : petList) {
             System.out.println(pet);
         }
@@ -67,9 +66,9 @@ public class TestClass {
     @Test
     public void testUpdatePet() {
         Pet pet = new Pet();
-        pet.setName("Tony");
-        pet.setOwner("Suk");
-        pet.setSpecies("");
+        pet.setName("Kaka");
+        pet.setOwner("Tom");
+        pet.setSpecies("cat");
         pet.setSex("w");
         pet.setBirth(new Date());
 
@@ -78,15 +77,15 @@ public class TestClass {
 
     @Test
     public void testDeletePet() {
-        petDao.deletePet("Tony");
+        petDao.deletePet("Slimy");
     }
 
     @Test
     public void testFindAllDogs() {
         Pet pet = new Pet();
         pet.setSpecies("dog");
-//        pet.setSex("m");
-//        pet.setOwner("Kate");
+        pet.setSex("m");
+        pet.setOwner("Kate");
         List<Pet> allDogs = petDao.findAllDogs(pet);
         for (Pet dog : allDogs) {
             System.out.println(dog);
@@ -96,10 +95,10 @@ public class TestClass {
     @Test
     public void testFindDogPets() {
         Pet pet = new Pet();
-        pet.setName("kk");
+        pet.setName("ka");
+        pet.setSpecies("cat");
 //        pet.setSex("w");
 //        pet.setOwner("Kate");
-        pet.setSpecies("dog");
         List<Pet> allDogs = petDao.findDogPets(pet);
         for (Pet dog : allDogs) {
             System.out.println(dog);
@@ -120,9 +119,9 @@ public class TestClass {
     @Test
     public void testUpdatePetDynamically() {
         Pet pet = new Pet();
-//        pet.setBirth(new Date());
-        pet.setName("hkkj");
-        pet.setSex("m");
+        pet.setName("coco");
+        pet.setBirth(new Date());
+        pet.setSex("w");
         petDao.updatePetDynamically(pet);
     }
 }

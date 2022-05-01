@@ -166,4 +166,13 @@ public class TestClass {
 
         System.out.println(new PetDaoImpl().selectPetsIn(map));
     }
+
+    @Test
+    public void testUpdatePetDynamically() {
+        Pet pet = new Pet();
+        pet.setName("coco");
+        pet.setBirth(new Date());
+        pet.setSex("w");
+        new PetDaoImpl().updatePetDynamically(pet);
+    }
 }
