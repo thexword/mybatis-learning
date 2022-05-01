@@ -36,4 +36,50 @@
         delete from pet
         where name=#{name}
     </delete>
+
+    <select id="findAllDogs" parameterType="Pet" resultType="Pet">
+        select *
+        from pet where species=#{species}
+        <if test="sex != null">
+            and sex = #{sex}
+        </if>
+        <if test="owner != null">
+            and owner like #{owner}
+        </if>
+    </select>
+
+    <select id="findDogPets" parameterType="Pet" resultType="Pet">
+        select *
+        from pet where species=#{species}
+        <choose>
+            <when test="sex != null">
+                and sex=#{sex}
+            </when>
+            <when test="owner != null">
+                and owner like #{owner}
+            </when>
+            <otherwise>
+                and name like 'Ka%'
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectPetsIn" resultType="Pet">
+        select *
+        from pet
+        where species in
+        <foreach item="item" index="index" collection="speciesList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="updatePetDynamically" parameterType="Pet">
+        update pet
+        <set>
+            <if test="birth!=null">birth=#{birth}</if>
+            <if test="death!=null">death=#{death}</if>
+            <if test="sex!=null">sex=#{sex}</if>
+        </set>
+        where name=#{name}
+    </update>
 </mapper>

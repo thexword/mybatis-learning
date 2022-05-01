@@ -4,6 +4,7 @@ import example.pojo.Pet;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PetDao {
     List<Pet> getAllPets();
@@ -19,4 +20,12 @@ public interface PetDao {
     void updatePet(Pet pet);
 
     void deletePet(String name);
+
+    List<Pet> findAllDogs(Pet pet);
+
+    List<Pet> findDogPets(Pet pet);
+
+    List<Pet> selectPetsIn(Map<String, Object> map);
+
+    void updatePetDynamically(Pet pet);
 }

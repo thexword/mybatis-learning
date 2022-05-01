@@ -4,10 +4,10 @@ package example.dao.impl;
 import example.dao.PetDao;
 import example.pojo.Pet;
 import example.utils.MyBatisUtils;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
+import java.util.Map;
 
 public class PetDaoImpl implements PetDao {
     @Override
@@ -93,5 +93,39 @@ public class PetDaoImpl implements PetDao {
 
         sqlSession.delete("deletePet", name);
         sqlSession.close();
+    }
+
+    @Override
+    public List<Pet> findAllDogs(Pet pet) {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        if (sqlSession == null) {
+            return null;
+        }
+        List<Pet> findAllDogs = sqlSession.selectList("findAllDogs", pet);
+        sqlSession.close();
+        return findAllDogs;
+    }
+
+    @Override
+    public List<Pet> findDogPets(Pet pet) {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        if (sqlSession == null) {
+            return null;
+        }
+        List<Pet> findAllDogs = sqlSession.selectList("findDogPets", pet);
+        sqlSession.close();
+        return findAllDogs;
+    }
+
+    @Override
+    public List<Pet> selectPetsIn(Map<String, Object> map) {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        if (sqlSession == null) {
+            return null;
+        }
+
+        List<Pet> findAllDogs = sqlSession.selectList("selectPetsIn", map);
+        sqlSession.close();
+        return findAllDogs;
     }
 }

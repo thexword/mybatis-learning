@@ -10,9 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TestClass {
     @Test
@@ -106,10 +104,10 @@ public class TestClass {
     @Test
     public void testCreatePet() {
         Pet pet = new Pet();
-        pet.setName("Tony");
-        pet.setOwner("Suk");
-        pet.setSpecies("cat");
-        pet.setSex("w");
+        pet.setName("hkkj");
+//        pet.setOwner("Kate");
+        pet.setSpecies("dog");
+//        pet.setSex("m");
         pet.setBirth(new Date());
 
         new PetDaoImpl().createPet(pet);
@@ -118,7 +116,7 @@ public class TestClass {
     @Test
     public void testUpdatePet() {
         Pet pet = new Pet();
-        pet.setName("Tony");
+        pet.setName("Slim");
         pet.setOwner("Suk");
         pet.setSpecies("cat");
         pet.setSex("w");
@@ -129,8 +127,43 @@ public class TestClass {
 
     @Test
     public void testDeletePet() {
-        new PetDaoImpl().deletePet("Slimmmy");
+        new PetDaoImpl().deletePet("Slimy");
     }
 
 
+    @Test
+    public void testFindAllDogs() {
+        Pet pet = new Pet();
+        pet.setSpecies("dog");
+//        pet.setSex("m");
+//        pet.setOwner("Kate");
+        List<Pet> allDogs = new PetDaoImpl().findAllDogs(pet);
+        for (Pet dog : allDogs) {
+            System.out.println(dog);
+        }
+    }
+
+    @Test
+    public void testFindDogPets() {
+        Pet pet = new Pet();
+        pet.setName("kk");
+//        pet.setSex("w");
+//        pet.setOwner("Kate");
+        pet.setSpecies("dog");
+        List<Pet> allDogs = new PetDaoImpl().findDogPets(pet);
+        for (Pet dog : allDogs) {
+            System.out.println(dog);
+        }
+    }
+
+    @Test
+    public void testSelectPetsIn() {
+        HashMap<String, Object> map = new HashMap<>();
+        List<String > speciesList = new ArrayList<>();
+        speciesList.add("bird");
+        speciesList.add("cat");
+        map.put("speciesList", speciesList);
+
+        System.out.println(new PetDaoImpl().selectPetsIn(map));
+    }
 }
