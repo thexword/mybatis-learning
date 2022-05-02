@@ -1,16 +1,22 @@
 package example.dao;
 
 import example.pojo.Pet;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
 
 public interface PetDao {
     @Select("select * from pet")
+    @Results(value = {
+            @Result(property = "id", column = "id"),
+            @Result(property = "name", column = "name"),
+            @Result(property = "owner", column = "owner"),
+            @Result(property = "species", column = "species"),
+            @Result(property = "sex", column = "sex"),
+            @Result(property = "birth", column = "birth"),
+            @Result(property = "death", column = "death")
+    })
     List<Pet> getAllPets();
 
     @Select("select * from pet where name=#{name}")
@@ -20,10 +26,15 @@ public interface PetDao {
     List<String> getAllSpecies();
 
     @Select("select * from pet where sex=#{sex}")
-    List<Pet> selectPets(String sex);
+    List<Pet> selectPets(@Param("sex") String sex);
 
     @Insert("insert into pet(name, owner, species, sex, birth, death) " +
             "values(#{name}, #{owner}, #{species}, #{sex}, #{birth}, #{death})")
+    @SelectKey(statement = "select last_insert_id()",
+            keyProperty = "id",
+            before = false,
+            resultType = Integer.class)
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void createPet(Pet pet);
 
     @Update("update pet set name=#{name}, owner=#{owner}, species=#{species}, sex=#{sex}, birth=#{birth}, death=#{death} " +

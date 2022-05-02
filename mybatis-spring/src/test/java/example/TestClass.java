@@ -61,6 +61,7 @@ public class TestClass {
         pet.setBirth(new Date());
 
         petDao.createPet(pet);
+        System.out.println(pet);
     }
 
     @Test
