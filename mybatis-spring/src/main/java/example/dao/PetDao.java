@@ -101,6 +101,6 @@ public interface PetDao {
     @Select("select get_pet_owner(#{name})")
     String getPetOwner(String name);
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     void doCreateAndUpdatePetInTx(Pet createPet, Pet updatePet);
 }
