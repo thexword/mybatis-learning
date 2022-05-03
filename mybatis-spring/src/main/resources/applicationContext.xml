@@ -2,8 +2,14 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- Configure datasource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -28,4 +34,23 @@
     <bean id="petDAOImpl" class="example.dao.impl.PetDaoImpl">
         <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
     </bean>
+
+    <!-- Configure transaction manager for the data source -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- Enable the annotation-based transaction behavior -->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+<!--    <tx:advice id="txAdvice" transaction-manager="txManager">-->
+<!--        <tx:attributes>-->
+<!--            <tx:method name="do*" rollback-for="java.lang.Exception"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="petDaoOperation" expression="execution(* example.dao.impl.PetDaoImpl.*(..))"/>-->
+<!--        <aop:advisor pointcut-ref="petDaoOperation" advice-ref="txAdvice"/>-->
+<!--    </aop:config>-->
 </beans>

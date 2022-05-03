@@ -9,14 +9,14 @@ sex CHAR(1),
 birth DATE,
 death DATE,
 PRIMARY KEY (id)
-) engine = MyISAM;
+) engine = InnoDB;
 
 CREATE TABLE user (
     id mediumint not null auto_increment,
     first_name CHAR(30) NULL ,
     last_name CHAR(30) null ,
     primary key (id)
-);
+) engine = InnoDB;;
 
 DELIMITER //
 

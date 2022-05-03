@@ -3,6 +3,7 @@ package example.dao;
 import example.pojo.Pet;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.StatementType;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -99,4 +100,7 @@ public interface PetDao {
 
     @Select("select get_pet_owner(#{name})")
     String getPetOwner(String name);
+
+    @Transactional
+    void doCreateAndUpdatePetInTx(Pet createPet, Pet updatePet);
 }

@@ -1,12 +1,14 @@
 package example;
 
 import example.dao.PetDao;
-import example.dao.impl.PetDaoImpl;
 import example.pojo.Pet;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class TestClass {
     private static final PetDao petDao;
@@ -14,7 +16,7 @@ public class TestClass {
     static {
         ClassPathXmlApplicationContext appContext = new ClassPathXmlApplicationContext(
                 new String[]{"applicationContext.xml"});
-        petDao = (PetDaoImpl) appContext.getBean("petDAOImpl");
+        petDao = (PetDao) appContext.getBean("petDAOImpl");
     }
 
     @Test
@@ -144,5 +146,24 @@ public class TestClass {
     public void testGetPetOwner() {
         String owner = petDao.getPetOwner("kiki");
         System.out.println(owner);
+    }
+
+    @Test
+    public void testDoCreateAndUpdatePetInTx() {
+        Pet createPet = new Pet();
+        createPet.setName("jack");
+        createPet.setOwner("Karris");
+        createPet.setSpecies("dog");
+        createPet.setSex("m");
+        createPet.setBirth(new Date());
+
+        Pet updatePet = new Pet();
+        updatePet.setName("jack");
+        updatePet.setOwner("Alex");
+        updatePet.setSpecies("cat");
+        updatePet.setSex("w");
+        updatePet.setBirth(new Date());
+
+        petDao.doCreateAndUpdatePetInTx(createPet, updatePet);
     }
 }
