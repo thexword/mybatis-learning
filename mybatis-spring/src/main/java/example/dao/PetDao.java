@@ -2,6 +2,7 @@ package example.dao;
 
 import example.pojo.Pet;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,8 @@ public interface PetDao {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createPet(Pet pet);
 
-    @Update("update pet set name=#{name}, owner=#{owner}, species=#{species}, sex=#{sex}, birth=#{birth}, death=#{death} " +
+    @Update("update pet " +
+            "set name=#{name}, owner=#{owner}, species=#{species}, sex=#{sex}, birth=#{birth}, death=#{death} " +
             "where name=#{name}")
     void updatePet(Pet pet);
 
@@ -79,4 +81,22 @@ public interface PetDao {
             "where name=#{name}" +
             "</script>")
     void updatePetDynamically(Pet pet);
+
+    @Select("call read_pet(" +
+            "#{name, mode=IN, jdbcType=VARCHAR}, " +
+            "#{owner, mode=OUT, jdbcType=VARCHAR}, " +
+            "#{species, mode=OUT, jdbcType=VARCHAR}," +
+            "#{sex, mode=OUT, jdbcType=VARCHAR}, " +
+            "#{birth, mode=OUT, jdbcType=DATE}, " +
+            "#{death, mode=OUT, jdbcType=DATE}" +
+            ")")
+    @Options(statementType = StatementType.CALLABLE)
+    void callReadPet(Map<String, String> map);
+
+    @Select("call read_all_pets()")
+    @Options(statementType = StatementType.CALLABLE)
+    List<Pet> callReadAllPets();
+
+    @Select("select get_pet_owner(#{name})")
+    String getPetOwner(String name);
 }

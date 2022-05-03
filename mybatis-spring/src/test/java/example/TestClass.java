@@ -6,10 +6,7 @@ import example.pojo.Pet;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TestClass {
     private static final PetDao petDao;
@@ -124,5 +121,28 @@ public class TestClass {
         pet.setBirth(new Date());
         pet.setSex("w");
         petDao.updatePetDynamically(pet);
+    }
+
+    @Test
+    public void testCallReadPet() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("name", "kiki");
+
+        petDao.callReadPet(map);
+        System.out.println(map);
+    }
+
+    @Test
+    public void testCallReadAllPets() {
+        List<Pet> petList = petDao.callReadAllPets();
+        for (Pet pet : petList) {
+            System.out.println(pet);
+        }
+    }
+
+    @Test
+    public void testGetPetOwner() {
+        String owner = petDao.getPetOwner("kiki");
+        System.out.println(owner);
     }
 }

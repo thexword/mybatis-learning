@@ -70,4 +70,19 @@ public class PetDaoImpl implements PetDao {
     public void updatePetDynamically(Pet pet) {
         sqlSessionTemplate.update("updatePetDynamically", pet);
     }
+
+    @Override
+    public void callReadPet(Map<String, String> map) {
+        sqlSessionTemplate.selectOne("callReadPet", map);
+    }
+
+    @Override
+    public List<Pet> callReadAllPets() {
+        return sqlSessionTemplate.selectList("callReadAllPets");
+    }
+
+    @Override
+    public String getPetOwner(String name) {
+        return sqlSessionTemplate.selectOne("getPetOwner", name);
+    }
 }
