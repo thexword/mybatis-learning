@@ -88,7 +88,7 @@ public class PetDaoImpl implements PetDao {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = java.lang.Exception.class)
     public void doCreateAndUpdatePetInTx(Pet createPet, Pet updatePet) throws Exception {
         createPet(createPet);
         int i = 100 / 0;
