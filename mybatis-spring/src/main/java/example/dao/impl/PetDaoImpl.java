@@ -4,6 +4,7 @@ import example.dao.PetDao;
 import example.pojo.Pet;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
@@ -89,6 +90,7 @@ public class PetDaoImpl implements PetDao {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void doCreateAndUpdatePetInTx(Pet createPet, Pet updatePet) {
         try {
             createPet(createPet);
