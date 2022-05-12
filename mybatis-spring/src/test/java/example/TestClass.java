@@ -164,6 +164,10 @@ public class TestClass {
         updatePet.setSex("w");
         updatePet.setBirth(new Date());
 
-        petDao.doCreateAndUpdatePetInTx(createPet, updatePet);
+        try {
+            petDao.doCreateAndUpdatePetInTx(createPet, updatePet);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

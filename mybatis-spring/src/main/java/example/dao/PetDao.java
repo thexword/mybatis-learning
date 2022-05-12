@@ -100,5 +100,5 @@ public interface PetDao {
     @Select("select get_pet_owner(#{name})")
     String getPetOwner(String name);
 
-    void doCreateAndUpdatePetInTx(Pet createPet, Pet updatePet);
+    void doCreateAndUpdatePetInTx(Pet createPet, Pet updatePet) throws Exception;
 }
