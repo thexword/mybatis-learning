@@ -18,73 +18,101 @@ public class PetDaoImpl implements PetDao {
 
     @Override
     public List<Pet> getAllPets() {
-        return sqlSessionTemplate.selectList("getAllPets");
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.getAllPets();
+//        return sqlSessionTemplate.selectList("getAllPets");
     }
 
 
     @Override
     public Pet getPet(String petName) {
-        return sqlSessionTemplate.selectOne("getPet", petName);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.getPet(petName);
+//        return sqlSessionTemplate.selectOne("getPet", petName);
     }
 
     @Override
     public List<String> getAllSpecies() {
-        return sqlSessionTemplate.selectList("getAllSpecies");
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.getAllSpecies();
+//        return sqlSessionTemplate.selectList("getAllSpecies");
     }
 
     @Override
     public List<Pet> selectPets(String sex) {
-        return sqlSessionTemplate.selectList("selectPets", sex);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.selectPets(sex);
+//        return sqlSessionTemplate.selectList("selectPets", sex);
     }
 
     @Override
     public void createPet(Pet pet) {
-        sqlSessionTemplate.insert("createPet", pet);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        mapper.createPet(pet);
+//        sqlSessionTemplate.insert("createPet", pet);
     }
 
     @Override
     public void updatePet(Pet pet) {
-        sqlSessionTemplate.update("updatePet", pet);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        mapper.updatePet(pet);
+//        sqlSessionTemplate.update("updatePet", pet);
     }
 
     @Override
     public void deletePet(String name) {
-        sqlSessionTemplate.delete("deletePet", name);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        mapper.deletePet(name);
+//        sqlSessionTemplate.delete("deletePet", name);
     }
 
     @Override
     public List<Pet> findAllDogs(Pet pet) {
-        return sqlSessionTemplate.selectList("findAllDogs", pet);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.findAllDogs(pet);
+//        return sqlSessionTemplate.selectList("findAllDogs", pet);
     }
 
     @Override
     public List<Pet> findDogPets(Pet pet) {
-        return sqlSessionTemplate.selectList("findDogPets", pet);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.findDogPets(pet);
+//        return sqlSessionTemplate.selectList("findDogPets", pet);
     }
 
     @Override
     public List<Pet> selectPetsIn(Map<String, Object> map) {
-        return sqlSessionTemplate.selectList("selectPetsIn", map);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.selectPetsIn(map);
+//        return sqlSessionTemplate.selectList("selectPetsIn", map);
     }
 
     @Override
     public void updatePetDynamically(Pet pet) {
-        sqlSessionTemplate.update("updatePetDynamically", pet);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        mapper.updatePetDynamically(pet);
+//        sqlSessionTemplate.update("updatePetDynamically", pet);
     }
 
     @Override
     public void callReadPet(Map<String, String> map) {
-        sqlSessionTemplate.selectOne("callReadPet", map);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        mapper.callReadPet(map);
+//        sqlSessionTemplate.selectOne("callReadPet", map);
     }
 
     @Override
     public List<Pet> callReadAllPets() {
-        return sqlSessionTemplate.selectList("callReadAllPets");
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.callReadAllPets();
+//        return sqlSessionTemplate.selectList("callReadAllPets");
     }
 
     @Override
     public String getPetOwner(String name) {
-        return sqlSessionTemplate.selectOne("getPetOwner", name);
+        PetDao mapper = sqlSessionTemplate.getMapper(PetDao.class);
+        return mapper.getPetOwner(name);
+//        return sqlSessionTemplate.selectOne("getPetOwner", name);
     }
 
     @Override
